@@ -4,6 +4,9 @@ const cors = require('cors')
 
 const app = express()
 
+//routers
+const loginRoute = require('./routes/LoginRoute')
+
 //middlewares
 app.enable('trust proxy')
 app.use(express.json())
@@ -16,10 +19,13 @@ app.use((req,res,next)=>{
     next()
 })
 
+//routes use
 app.get('/',(req,res)=>{
     res.send('hello')
 })
-//page not found setup
+app.use('/api',loginRoute)
+
+// page not found setup
 app.use((req,res)=>{
     res.status(400).json({
         msg:"page not found"
