@@ -3,8 +3,20 @@
 @import "tailwindcss/utilities";
 
 .animate{
-    @apply transition duration-200 ease-in-out transform
+    @apply transition duration-200 ease-in-out transform;
 }
 .animate:hover{
-    @apply -translate-y-1 scale-110
+    @apply -translate-y-1 scale-100;
+}
+
+.navbar{
+    @apply shadow-md flex w-full justify-between items-center bg-white p-3 rounded-md mt-5 flex-col;
+}
+.layout{
+    @apply mt-6
+}
+@media(min-width:786px){
+    .navbar{
+        @apply flex-row
+    }
 }
