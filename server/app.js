@@ -5,7 +5,7 @@ const cors = require('cors')
 const app = express()
 
 //routers
-const loginRoute = require('./routes/LoginRoute')
+const loginRoute = require('./routes/userAuthRoute')
 
 //middlewares
 app.enable('trust proxy')
@@ -27,7 +27,7 @@ app.use('/api',loginRoute)
 
 // page not found setup
 app.use((req,res)=>{
-    res.status(400).json({
+    res.status(404).json({
         msg:"page not found"
     })
 })
