@@ -1,9 +1,11 @@
 import React from "react";
-import Navitem from "./NavItems";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import { ButtonComponent } from "../index";
+import Navitem from "./NavItems";
+import { logout } from "../../config/reducers/authReducer";
 
-const NavList = ({ history }) => {
+const NavList = ({ history, logout, isAuth }) => {
   //make active navitem with text primary
   const isActive = (history, path) => {
     if (history.location.pathname === path) {
@@ -25,11 +27,30 @@ const NavList = ({ history }) => {
         name="Dashboard"
         linkStyle={isActive(history, "/dashboard")}
       />
-      <ButtonComponent
-        title="Signout"
-        moreStyle="hover:text-primary"
-        action={() => console.log("signout")}
-      />
+
+      {isAuth && (
+        <ButtonComponent
+          title="Logout"
+          moreStyle="hover:text-primary"
+          action={() => logout()}
+        />
+      )}
+      {!isAuth && (
+        <>
+        <ButtonComponent
+          title="Login"
+          moreStyle="hover:text-primary"
+          isButton={false}
+          href="/login"
+        />
+        <ButtonComponent
+          title="Register"
+          moreStyle="hover:text-primary"
+          isButton={false}
+          href="/register"
+        />
+        </>
+      )}
       <ButtonComponent
         title="Cart"
         isButton={false}
@@ -41,4 +62,8 @@ const NavList = ({ history }) => {
   );
 };
 
-export default withRouter(NavList);
+const mapStateToProps = (state) => ({
+  isAuth: state.authReducer.isAuthenticated,
+})
+
+export default connect(mapStateToProps , { logout })(withRouter(NavList));
