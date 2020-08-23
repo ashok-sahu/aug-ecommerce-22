@@ -6,6 +6,8 @@ const app = express()
 
 //routers
 const loginRoute = require('./routes/userAuthRoute')
+const catagoryRoute = require('./routes/catagoryRoute')
+const productRoute = require('./routes/productRoute')
 
 //middlewares
 app.enable('trust proxy')
@@ -23,7 +25,10 @@ app.use((req,res,next)=>{
 app.get('/',(req,res)=>{
     res.send('hello')
 })
-app.use('/api',loginRoute)
+app.use('/api/user',loginRoute)
+app.use('/api/category',catagoryRoute)
+app.use('/api/product',productRoute)
+
 
 // page not found setup
 app.use((req,res)=>{

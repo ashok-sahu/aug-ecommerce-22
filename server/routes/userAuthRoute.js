@@ -8,16 +8,16 @@ const auth = require("../middlewares/authMiddleware");
 //@desc Register User
 //@access public
 router
-  .get("/user", auth, authController.userAuth)
+  .get("/", auth, authController.userAuth)
   .post(
-    "/user/register",
+    "/register",
     validator.validateUserRegisterRequest,
     validator.isRequestValidated,
     authController.userRegister
   );
 
 router.post(
-  "/user/login",
+  "/login",
   validator.validateUserSignInRequest,
   validator.isRequestValidated,
   authController.userLogin
